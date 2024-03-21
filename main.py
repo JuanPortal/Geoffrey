@@ -13,9 +13,9 @@ async def on_ready():
 
 @client.command(pass_context=True, aliases=['t'])
 async def test(ctx):
-    await ctx.send('$wotd')
-    await ctx.send('$cd 00:02')
-    await ctx.send('$meme')
+    # await ctx.send('$wotd')
+    # await ctx.send('$cd 00:02')
+    # await ctx.send('$meme')
     await ctx.send('$psv')
 
 
