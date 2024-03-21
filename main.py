@@ -19,8 +19,8 @@ async def test(ctx):
     await ctx.send('$psv')
 
 
-@client.command(pass_context=True, aliases=['i'])
-async def info(ctx, *, arg):
+@client.command(pass_context=True, aliases=['i', 'info'])
+async def dox(ctx, *, arg):
     try:
         if arg not in [str(member.name) for member in ctx.guild.members]:
             await ctx.send("Member not found")
