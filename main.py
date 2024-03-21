@@ -13,9 +13,9 @@ async def on_ready():
 
 @client.command(pass_context=True, aliases=['t'])
 async def test(ctx):
-    # await ctx.send('$wotd')
-    # await ctx.send('$cd 00:02')
-    # await ctx.send('$meme')
+    await ctx.send('$wotd')
+    await ctx.send('$cd 00:02')
+    await ctx.send('$meme')
     await ctx.send('$psv')
 
 
@@ -48,7 +48,7 @@ async def members(ctx):
     members = ctx.guild.members
     member_list = ''
     for member in members:
-        member_list += str(member.name) + ' (' + str(member.display_name) + ')' + '\n'
+        member_list += str(member.name) + '      (' + str(member.display_name) + ')' + '\n'
     embed = discord.Embed(title="Members", color=discord.Color(0xFFFFFF), description=member_list)
     await ctx.send(embed=embed)
 
