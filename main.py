@@ -12,34 +12,6 @@ async def on_ready():
     print("Geoffrey's ready to go!")
 
 
-@client.command(pass_context=True, aliases=['monopolio', 'equipo', 'pais', 'paises'])
-async def monopoly(ctx, *args):
-    n = len(args)
-    
-    if n % 2 != 0 or n < 2:
-        await ctx.send("Ingresa número par")
-        return
-
-    friends = list(args)[:n//2]
-    countries = list(args)[n//2:]
-    random.shuffle(countries)
-
-    assignments = {}
-    for friend, country in zip(friends, countries):
-        assignments[friend] = country
-
-    assignment_text = "\n".join([f"{friend}: {assigned_country}" for friend, assigned_country in assignments.items()])
-    await ctx.send(f"{assignment_text}")
-
-
-@client.command(pass_context=True, aliases=['t'])
-async def test(ctx):
-    await ctx.send('$wotd')
-    await ctx.send('$cd 00:02')
-    await ctx.send('$meme')
-    await ctx.send('$psv')
-
-
 @client.command(pass_context=True, aliases=['i', 'info'])
 async def dox(ctx, *, arg):
     try:
@@ -74,13 +46,51 @@ async def members(ctx):
     await ctx.send(embed=embed)
 
 
+@client.command(pass_context=True, aliases=['monopolio', 'equipo', 'pais', 'paises', 'team'])
+async def monopoly(ctx, *args):
+    n = len(args)
+    
+    if n % 2 != 0 or n < 2:
+        await ctx.send("Ingresa número par")
+        return
+
+    friends = list(args)[:n//2]
+    countries = list(args)[n//2:]
+    random.shuffle(countries)
+
+    assignments = {}
+    for friend, country in zip(friends, countries):
+        assignments[friend] = country
+
+    assignment_text = "\n".join([f"{friend}: {assigned_country}" for friend, assigned_country in assignments.items()])
+    await ctx.send(f"{assignment_text}")
+
+
+@client.command(pass_context=True, aliases=['t'])
+async def test(ctx):
+    await ctx.send('$wotd')
+    await ctx.send('$cd 00:02')
+    await ctx.send('$meme')
+    await ctx.send('$psv')
+
+
+@client.command(pass_context=True, aliases=['moneda'])
+async def flipcoin(ctx):
+    await ctx.send(random.choice(['heads', 'tails']))
+
+
+@client.command(pass_context=True, aliases=['random'])
+async def rng(ctx, number):
+    await ctx.send(random.randint(1, number))
+
+
 
 @client.command(pass_context=True)
 async def help(ctx):
     em = discord.Embed(
         title="Help",
         description=
-        "***$info*** *member*\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0member info\n\n***$members***\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0member list"
+        "***$dox*** *member*\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0member info\n\n***$members***\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0member list\n\n***$monopoly*** *player1 player2 country1 country2*\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0assigns a random country\n\n***$test***\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0tests other bots\n\n***$flipcoin***\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0heads or tails\n\n***$rng*** *number*\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0random number generator"
     )
     await ctx.send(embed=em)
 
