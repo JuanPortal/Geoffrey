@@ -80,7 +80,7 @@ async def flipcoin(ctx):
 
 
 @client.command(pass_context=True, aliases=['random'])
-async def rng(ctx, number):
+async def rng(ctx, number: int):
     await ctx.send(random.randint(1, int(number)))
 
 
