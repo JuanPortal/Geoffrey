@@ -1,6 +1,7 @@
 from discord.ext import commands
 import discord
 import os
+import random
 
 client = commands.Bot(command_prefix="$", intents=discord.Intents.all())
 client.remove_command("help")
@@ -9,6 +10,26 @@ client.remove_command("help")
 @client.event
 async def on_ready():
     print("Geoffrey's ready to go!")
+
+
+@client.command(pass_context=True, aliases=['monopolio', 'equipo', 'pais', 'paises'])
+async def monopoly(ctx, *args):
+    n = len(args)
+    
+    if n % 2 != 0 or n < 2:
+        await ctx.send("Ingresa número par")
+        return
+
+    friends = args[:n]
+    countries = args[n:]
+    random.shuffle(countries)
+
+    assignments = {}
+    for friend, country in zip(friends, countries):
+        assignments[friend] = country
+
+    assignment_text = "\n".join([f"{friend}: {assigned_country}" for friend, assigned_country in assignments.items()])
+    await ctx.send(f"{assignment_text}")
 
 
 @client.command(pass_context=True, aliases=['t'])
