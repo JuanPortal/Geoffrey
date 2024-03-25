@@ -20,8 +20,8 @@ async def monopoly(ctx, *args):
         await ctx.send("Ingresa número par")
         return
 
-    friends = args[:n//2]
-    countries = args[n//2:]
+    friends = list(args)[:n//2]
+    countries = list(args)[n//2:]
     random.shuffle(countries)
 
     assignments = {}
